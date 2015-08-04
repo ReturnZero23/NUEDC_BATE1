@@ -6,10 +6,11 @@
 //作者：www.avrgcc.com
 //时间：2014.03.01
 ********************************************************************/
-#include <msp430x14x.h>
+#include <msp430x16x.h>
 #include "Config.h"
 #include "Data.c"
 #include "LCD12864.c"
+#include "ADC12.c"
 
 
 //*************************************************************************
@@ -39,18 +40,25 @@ int main(void)
   delay_ms(10);                                //延时10ms
   LCD_init();                                   //液晶参数初始化设置
   LCD_clear();                                  //清屏
+  DAC12_Init();                             //初始化DAC12
+  delay_ms(10);
   while(1)
   {
-    Display_photo(photo7); 
+    //Display_photo(photo7); 
     //Display_point(3,3,1,photo7);
     //Display_sin(photo7);
     //Display_juchi(photo7);
     //Display_juxing(photo7);
     //Display_changestr(photo7,zhengxian);
-    delay_ms(1000);
-    delay_ms(1000);
-    delay_ms(1000);
-    delay_ms(1000);
+    //delay_ms(1000);
+    //delay_ms(1000);
+    //delay_ms(1000);
+    //delay_ms(1000);
+    for(int i=0;i<4000;i++)
+    {
+      DAC12_0DAT = Sin_tab[i%100];                       //数据写入寄存器，写入激活DAC转换
+      //delay_us(300);                        //这里延时是为了LED灯有显示效果，由亮到暗，电压输出由小到大，用示波器时去掉
+    }
   }
 }
 
