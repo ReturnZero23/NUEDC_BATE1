@@ -42,23 +42,27 @@ int main(void)
   LCD_clear();                                  //清屏
   DAC12_Init();                             //初始化DAC12
   delay_ms(10);
+  Display(); 
   while(1)
   {
-    //Display_photo(photo7); 
+    //uchar x_line,y_line;
+    
+    Display_photo(photo7); 
     //Display_point(3,3,1,photo7);
     //Display_sin(photo7);
     //Display_juchi(photo7);
     //Display_juxing(photo7);
     //Display_changestr(photo7,zhengxian);
-    //delay_ms(1000);
-    //delay_ms(1000);
-    //delay_ms(1000);
-    //delay_ms(1000);
+    //Display_freq(4321);
+    //Display_ampl(4321);
+    //Display_shine(1,0,3214);
+    /*
     for(int i=0;i<4000;i++)
     {
       DAC12_0DAT = Sin_tab[i%100];                       //数据写入寄存器，写入激活DAC转换
       //delay_us(300);                        //这里延时是为了LED灯有显示效果，由亮到暗，电压输出由小到大，用示波器时去掉
     }
+    */
   }
 }
 

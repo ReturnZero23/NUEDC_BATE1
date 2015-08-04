@@ -59,10 +59,10 @@ void DisplayCgrom(uchar addr,uchar *hz)
 //****************************************************************
 void Display(void)
 {
-  DisplayCgrom(0x80,"欣世纪电子欢迎你");
-  DisplayCgrom(0x88,"旺:jingyehanxing");
-  DisplayCgrom(0x90,"www.avrgcc.com  ");
-  DisplayCgrom(0x98,"电话057487476870");
+  DisplayCgrom(0x80,"          123456");
+  DisplayCgrom(0x88,"                ");
+  DisplayCgrom(0x90,"                ");
+  DisplayCgrom(0x98,"                ");
 }
 
 //***********************************************************************
@@ -235,11 +235,11 @@ void Display_point(uchar y,uchar x,int con,uchar *img)
 //****************************************************************
 void Display_changestr(uchar *d_img,uchar *s_img)
 {
-  for(int i = 29;i < 41; i++)
+  for(int i = 33;i < 45; i++)
   {
       for(int j = 0 ; j <8;j++)
       {
-          d_img[i*16+8+j]=s_img[j+(i-29)*8];
+          d_img[i*16+8+j]=s_img[j+(i-33)*8];
       }
   }
 }
@@ -250,7 +250,7 @@ void Display_sin(uchar *img)
 {
   for(int i = 0; i <64 ;i++)
   {
-      Display_point(i,(int)(Sin_tab[(i*3)%100]*(36.0/3267))+3,1,img);
+      Display_point(i,(int)(Sin_tab[(i*3)%100]*(36.0/3267))+6,1,img);
   }
   Display_changestr(photo7,zhengxian);
 }
@@ -261,19 +261,19 @@ void Display_juchi(uchar *img)
 {
   for(int i = 0; i <16 ;i++)
   {
-      Display_point(i,32-2*i+3,1,img);
+      Display_point(i,32-2*i+6,1,img);
   }
   for(int i = 16; i <32 ;i++)
   {
-      Display_point(i,2*(i-16)+3,1,img);
+      Display_point(i,2*(i-16)+6,1,img);
   }
   for(int i = 32; i <48 ;i++)
   {
-      Display_point(i,32-2*(i-32)+3,1,img);
+      Display_point(i,32-2*(i-32)+6,1,img);
   }
   for(int i = 48; i <64 ;i++)
   {
-      Display_point(i,2*(i-48)+3,1,img);
+      Display_point(i,2*(i-48)+6,1,img);
   }
   Display_changestr(photo7,juchi);
 }
@@ -284,31 +284,113 @@ void Display_juxing(uchar *img)
 {
   for(int i = 0; i <16 ;i++)
   {
-      Display_point(i,6,1,img);
+      Display_point(i,9,1,img);
   }
-  for(int i = 6; i <33 ;i++)
+  for(int i = 9; i <36 ;i++)
   {
       Display_point(16,i,1,img);
   }
   for(int i = 16; i <32 ;i++)
   {
-      Display_point(i,32,1,img);
+      Display_point(i,35,1,img);
   }
-  for(int i = 6; i <33 ;i++)
+  for(int i = 9; i <36 ;i++)
   {
       Display_point(32,i,1,img);
   }
   for(int i = 32; i <48 ;i++)
   {
-      Display_point(i,6,1,img);
+      Display_point(i,9,1,img);
   }
-  for(int i = 6; i <33 ;i++)
+  for(int i = 9; i <36 ;i++)
   {
       Display_point(48,i,1,img);
   }
   for(int i = 48; i <64 ;i++)
   {
-      Display_point(i,32,1,img);
+      Display_point(i,35,1,img);
   }
   Display_changestr(photo7,juxing);
+}
+//****************************************************************
+//函数名称：Display_freq()显示频率
+//****************************************************************
+void Display_freq(int freq)
+{
+  uint qian,bai,shi,ge;
+  qian=freq/1000;                       //分出千，百，十，和个位
+  bai=(freq%1000)/100;
+  shi=(freq%100)/10;
+  ge=(freq%10);
+  unsigned char str[] = "          1234";
+  //unsigned char str[] = "          1234";
+  str[10]=qian+48;
+  str[11]=bai+48;
+  str[12]=shi+48;
+  str[13]=ge+48;
+  DisplayCgrom(0x80,str);
+  //DisplayCgrom(0x88,"                ");
+  //DisplayCgrom(0x90,"                ");
+  //DisplayCgrom(0x98,"                ");
+}
+//****************************************************************
+//函数名称：Display_ampl()显示频率
+//****************************************************************
+void Display_ampl(int ampl)
+{
+  uint qian,bai,shi,ge;
+  qian=ampl/1000;                       //分出千，百，十，和个位
+  bai=(ampl%1000)/100;
+  shi=(ampl%100)/10;
+  ge=(ampl%10);
+  unsigned char str[] = "          1234";
+  //unsigned char str[] = "          1234";
+  str[10]=qian+48;
+  str[11]=bai+48;
+  str[12]=shi+48;
+  str[13]=ge+48;
+  //DisplayCgrom(0x80,str);
+  DisplayCgrom(0x90,str);
+  //DisplayCgrom(0x90,"                ");
+  //DisplayCgrom(0x98,"                ");
+}
+//****************************************************************
+//函数名称：Display_shine()闪烁
+//****************************************************************
+void Display_shine(uchar x,uchar y,int num)
+{
+  static int flag = 0 ;
+  uint temp[4];
+  temp[0]=num/1000;                       //分出千，百，十，和个位
+  temp[1]=(num%1000)/100;
+  temp[2]=(num%100)/10;
+  temp[3]=(num%10);
+  unsigned char str[] = "          1234";
+  //unsigned char str[] = "          1234";
+  str[10]=temp[0]+48;
+  str[11]=temp[1]+48;
+  str[12]=temp[2]+48;
+  str[13]=temp[3]+48;
+  //unsigned char str[] = "          1234";
+  if(flag)
+  {
+  str[10+y]=temp[y]+48;
+  if(x)
+  DisplayCgrom(0x90,str);
+  else
+  DisplayCgrom(0x80,str);
+  delay_ms(1000);
+  }
+  else
+  {
+  str[10+y]= ' ';
+  if(x)
+  DisplayCgrom(0x90,str);
+  else
+  DisplayCgrom(0x80,str);
+  delay_ms(1000);
+  }
+  flag = ~flag;
+  //DisplayCgrom(0x80,str);
+  
 }

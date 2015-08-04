@@ -6,18 +6,17 @@
   <configuration>
     <name>Debug</name>
     <outputs>
-      <file>$PROJ_DIR$\Config.h</file>
-      <file>$PROJ_DIR$\Debug\Obj\main.r43</file>
-      <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
-      <file>$TOOLKIT_DIR$\inc\in430.h</file>
-      <file>$PROJ_DIR$\main.c</file>
-      <file>$TOOLKIT_DIR$\inc\msp430x14x.h</file>
-      <file>$PROJ_DIR$\Debug\Exe\NUEDC.d43</file>
       <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
-      <file>$PROJ_DIR$\Debug\Obj\NUEDC.pbd</file>
-      <file>$TOOLKIT_DIR$\config\lnk430F169.xcl</file>
-      <file>$PROJ_DIR$\Debug\Exe\NUEDC.txt</file>
       <file>$TOOLKIT_DIR$\inc\msp430x16x.h</file>
+      <file>$TOOLKIT_DIR$\inc\intrinsics.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\NUEDC.pbd</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.r43</file>
+      <file>$TOOLKIT_DIR$\config\lnk430F169.xcl</file>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$PROJ_DIR$\Debug\Exe\NUEDC.txt</file>
+      <file>$PROJ_DIR$\Config.h</file>
+      <file>$PROJ_DIR$\Debug\Exe\NUEDC.d43</file>
+      <file>$TOOLKIT_DIR$\inc\in430.h</file>
       <file>$PROJ_DIR$\Data.c</file>
       <file>$PROJ_DIR$\LCD12864.c</file>
       <file>$TOOLKIT_DIR$\config\multiplier.xcl</file>
@@ -25,25 +24,43 @@
       <file>$PROJ_DIR$\ADC12.c</file>
     </outputs>
     <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>XLINK</name>
+          <file> 9 7</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Obj\NUEDC.pbd</name>
+      <inputs>
+        <tool>
+          <name>BILINK</name>
+          <file> 0</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
       <name>$PROJ_DIR$\main.c</name>
       <outputs>
         <tool>
           <name>ICC430</name>
-          <file> 1</file>
+          <file> 4</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 7</file>
+          <file> 0</file>
         </tool>
       </outputs>
       <inputs>
         <tool>
           <name>ICC430</name>
-          <file> 11 3 2 0 12 13 16</file>
+          <file> 1 10 2 8 11 12 15</file>
         </tool>
         <tool>
           <name>BICOMP</name>
-          <file> 11 3 2 0 12 13 16</file>
+          <file> 1 10 2 8 11 12 15</file>
         </tool>
       </inputs>
     </file>
@@ -52,33 +69,15 @@
       <outputs>
         <tool>
           <name>XLINK</name>
-          <file> 10</file>
-        </tool>
-      </outputs>
-      <inputs>
-        <tool>
-          <name>XLINK</name>
-          <file> 9 14 1 15</file>
-        </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>$PROJ_DIR$\Debug\Obj\NUEDC.pbd</name>
-      <inputs>
-        <tool>
-          <name>BILINK</name>
           <file> 7</file>
         </tool>
-      </inputs>
-    </file>
-    <file>
-      <name>[ROOT_NODE]</name>
-      <outputs>
+      </outputs>
+      <inputs>
         <tool>
           <name>XLINK</name>
-          <file> 6 10</file>
+          <file> 5 13 4 14</file>
         </tool>
-      </outputs>
+      </inputs>
     </file>
   </configuration>
   <configuration>
